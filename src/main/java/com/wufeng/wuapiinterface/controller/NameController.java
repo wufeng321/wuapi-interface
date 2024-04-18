@@ -1,8 +1,7 @@
 package com.wufeng.wuapiinterface.controller;
 
-import cn.hutool.http.HttpRequest;
-import com.wufeng.wuapiinterface.model.User;
-import com.wufeng.wuapiinterface.utils.SignUtils;
+import com.wufeng.wuapiclientsdk.model.User;
+import com.wufeng.wuapiclientsdk.utils.SignUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;

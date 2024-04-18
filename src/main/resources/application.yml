@@ -3,4 +3,7 @@ server:
   port: 8123
   servlet:
     context-path: /api
-
+wuapi:
+  client:
+    access-key: taco
+    secret-key: abcdef
