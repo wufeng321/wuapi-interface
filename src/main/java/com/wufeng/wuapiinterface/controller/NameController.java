@@ -1,7 +1,11 @@
 package com.wufeng.wuapiinterface.controller;
 
+import cn.hutool.http.HttpRequest;
 import com.wufeng.wuapiinterface.model.User;
+import com.wufeng.wuapiinterface.utils.SignUtils;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author wufeng
@@ -21,7 +25,25 @@ public class NameController {
         return "POST 你的名字是"+ name;
     }
     @PostMapping("/getUserNameByPost")
-    public String getUserNameByPost(@RequestBody User user){
+    public String getUserNameByPost(@RequestBody User user, HttpServletRequest request){
+        // 从请求头中获取参数
+        String accessKey = request.getHeader("accessKey");
+        String nonce = request.getHeader("nonce");
+        String timeStamp = request.getHeader("timeStamp");
+        String sign = request.getHeader("sign");
+        String body = request.getHeader("body");
+
+        // todo: 模拟校验
+        if(!accessKey.equals("taco")){
+            throw new RuntimeException("无权限");
+        }
+
+        String serveSign = SignUtils.genSign(body, "abcd");
+        if(!sign.equals(serveSign)){
+            throw new RuntimeException("签名验证失败");
+        }
+
+
         return"P0ST 用户名字是"+ user.getUsername();
     }
 }
