@@ -6,4 +6,4 @@ server:
 wuapi:
   client:
     access-key: taco
-    secret-key: abcdef
+    secret-key: abcd
