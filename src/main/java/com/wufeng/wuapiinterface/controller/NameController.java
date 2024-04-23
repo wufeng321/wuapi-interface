@@ -16,7 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/name")
 public class NameController {
     @GetMapping("/getNameByGet")
-    public String getNameByGet(String name){
+    public String getNameByGet(String name, HttpServletRequest request){
+        System.out.println(request.getHeader("taco"));
         return "GET 你的名字是"+ name;
     }
     @PostMapping("/getNameByPost")
@@ -25,24 +26,24 @@ public class NameController {
     }
     @PostMapping("/getUserNameByPost")
     public String getUserNameByPost(@RequestBody User user, HttpServletRequest request){
-        // 从请求头中获取参数
-        String accessKey = request.getHeader("accessKey");
-        String nonce = request.getHeader("nonce");
-        String timeStamp = request.getHeader("timeStamp");
-        String sign = request.getHeader("sign");
-        String body = request.getHeader("body");
+        //// 从请求头中获取参数
+        //String accessKey = request.getHeader("accessKey");
+        //String nonce = request.getHeader("nonce");
+        //String timeStamp = request.getHeader("timeStamp");
+        //String sign = request.getHeader("sign");
+        //String body = request.getHeader("body");
+        //
+        //// todo: 模拟校验
+        //if(!accessKey.equals("taco")){
+        //    throw new RuntimeException("无权限");
+        //}
+        //
+        //String serveSign = SignUtils.genSign(body, "abcd");
+        //if(!sign.equals(serveSign)){
+        //    throw new RuntimeException("签名验证失败");
+        //}
 
-        // todo: 模拟校验
-        if(!accessKey.equals("taco")){
-            throw new RuntimeException("无权限");
-        }
-
-        String serveSign = SignUtils.genSign(body, "abcd");
-        if(!sign.equals(serveSign)){
-            throw new RuntimeException("签名验证失败");
-        }
-
-
-        return"P0ST 用户名字是"+ user.getUsername();
+        String result = "POST 用户名字是"+ user.getUsername();
+        return result;
     }
 }
